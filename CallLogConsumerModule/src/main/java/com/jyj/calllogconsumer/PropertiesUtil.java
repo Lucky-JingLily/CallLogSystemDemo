@@ -1,37 +1,33 @@
 package com.jyj.calllogconsumer;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * @Classname PropertiesUtil
- * @Description TODO
- * @Date 2019/11/23 10:10 下午
- * @Created by lipeijing
+ * Created by Administrator on 2017/4/11.
  */
 public class PropertiesUtil {
-
-    private static Properties properties;
-    static {
+    public static Properties props ;
+    static{
         try {
-            InputStream inputStream = ClassLoader.getSystemResourceAsStream("gendata.conf");
-            properties = new Properties();
-            properties.load(inputStream);
-        } catch (IOException e) {
+            //加载外部属性文件
+            InputStream in = ClassLoader.getSystemResourceAsStream("kafka.properties");
+            props = new Properties();
+            props.load(in);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static String getProp(String key) {
-        return properties.getProperty(key);
+    public static String getProp(String key){
+        return props.getProperty(key) ;
     }
 
     public static String getString(String key) {
-        return properties.getProperty(key);
+        return props.getProperty(key);
     }
 
     public static int getInt(String key) {
-        return Integer.parseInt(properties.getProperty(key));
+        return Integer.parseInt(props.getProperty(key));
     }
 }
